@@ -254,6 +254,91 @@ Premium Men's Wellness Formula
 <a href="YOUR_CASHFREE_LINK" class="buy-btn">
 BUY NOW
 </a>
+  <button onclick="openTracking()"
+style="
+padding:15px 35px;
+background:#fff;
+color:#000;
+border:none;
+border-radius:50px;
+font-weight:bold;
+cursor:pointer;
+margin-top:15px;
+">
+TRACK ORDER
+</button>
+
+<div id="trackingPopup"
+style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.8);
+z-index:9999;
+">
+
+<div style="
+background:#111;
+width:90%;
+max-width:450px;
+margin:100px auto;
+padding:30px;
+border-radius:20px;
+text-align:center;
+">
+
+<h2>Track Your Order</h2>
+
+<input
+id="trackingNumber"
+type="text"
+placeholder="Enter Tracking ID"
+style="
+width:100%;
+padding:15px;
+margin-top:20px;
+border-radius:10px;
+border:none;
+">
+
+<br><br>
+
+<button onclick="trackOrder()"
+style="
+padding:15px 30px;
+background:#ffd700;
+border:none;
+border-radius:50px;
+font-weight:bold;
+">
+Track
+</button>
+
+<button onclick="closeTracking()"
+style="
+padding:15px 30px;
+background:red;
+color:white;
+border:none;
+border-radius:50px;
+margin-left:10px;
+">
+Close
+</button>
+
+<div id="trackingResult"
+style="
+margin-top:20px;
+font-size:18px;
+">
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1020,6 +1105,29 @@ grid-template-columns:1fr;
 </style>
 
 <script>
+  function openTracking(){
+document.getElementById("trackingPopup").style.display="block";
+}
+
+function closeTracking(){
+document.getElementById("trackingPopup").style.display="none";
+}
+
+function trackOrder(){
+
+let tracking =
+document.getElementById("trackingNumber").value;
+
+if(tracking==""){
+alert("Enter Tracking ID");
+return;
+}
+
+document.getElementById("trackingResult").innerHTML=
+"📦 Tracking ID: "+tracking+
+"<br><br>🚚 Order In Transit";
+
+}
 
 function changeImage(el){
 document.getElementById("mainImage").src = el.src;
