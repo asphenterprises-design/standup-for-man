@@ -253,18 +253,16 @@ Premium Men's Wellness Formula
 
 <a href="YOUR_CASHFREE_LINK" class="buy-btn">
 BUY NOW
-</a>
-  <button id="trackBtn"
+<button onclick="openTracking()"
 style="
-width:100%;
-padding:15px;
-margin-top:15px;
+padding:15px 35px;
 background:#fff;
 color:#000;
 border:none;
 border-radius:50px;
 font-weight:bold;
 cursor:pointer;
+margin-top:15px;
 ">
 TRACK ORDER
 </button>
@@ -278,19 +276,17 @@ left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,.8);
-z-index:99999;
+z-index:9999;
 ">
 
-<div
-style="
+<div style="
 background:#111;
 width:90%;
-max-width:400px;
+max-width:450px;
 margin:100px auto;
-padding:25px;
+padding:30px;
 border-radius:20px;
 text-align:center;
-color:white;
 ">
 
 <h2>Track Your Order</h2>
@@ -301,28 +297,47 @@ type="text"
 placeholder="Enter Tracking ID"
 style="
 width:100%;
-padding:12px;
-border:none;
+padding:15px;
+margin-top:20px;
 border-radius:10px;
+border:none;
 ">
 
 <br><br>
 
-<button id="trackNow">
+<button onclick="trackOrder()"
+style="
+padding:15px 30px;
+background:#ffd700;
+border:none;
+border-radius:50px;
+font-weight:bold;
+">
 Track
 </button>
 
-<button id="closePopup">
+<button onclick="closeTracking()"
+style="
+padding:15px 30px;
+background:red;
+color:white;
+border:none;
+border-radius:50px;
+margin-left:10px;
+">
 Close
 </button>
 
 <div id="trackingResult"
-style="margin-top:20px;">
+style="
+margin-top:20px;
+font-size:18px;
+">
 </div>
 
 </div>
 
-</div>  
+</div>
 </div>
 
 </div>
@@ -1145,10 +1160,6 @@ document.getElementById("trackingResult").innerHTML =
 status;
 
 };
-
-}
-
-}
 
 function changeImage(el){
 document.getElementById("mainImage").src = el.src;
