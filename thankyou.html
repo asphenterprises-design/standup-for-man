@@ -1,75 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment Successful</title>
-
-<style>
-
-body{
-font-family:Arial,sans-serif;
-background:#0b0b0b;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-text-align:center;
-margin:0;
-}
-
-.box{
-background:#171717;
-padding:40px;
-border-radius:20px;
-width:90%;
-max-width:500px;
-}
-
-h1{
-color:#00ff66;
-}
-
-#tracking{
-font-size:28px;
-color:#ffd700;
-font-weight:bold;
-margin:20px 0;
-}
-
-.btn{
-display:inline-block;
-background:#ffd700;
-color:black;
-padding:15px 30px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="box">
-
-<h1>✅ Payment Successful</h1>
-
-<p>Your order has been received.</p>
-
-<div id="tracking"></div>
-
-<a href="index.html" class="btn">
-Back To Home
-</a>
-
-</div>
-
-<script>
-
 let tracking = localStorage.getItem("tracking");
 
 if(!tracking){
@@ -80,12 +8,12 @@ Math.floor(100000 + Math.random()*900000);
 
 localStorage.setItem("tracking",tracking);
 
+localStorage.setItem(
+"orderTime",
+Date.now()
+);
+
 }
 
 document.getElementById("tracking").innerHTML =
 "Tracking ID: " + tracking;
-
-</script>
-
-</body>
-</html>
