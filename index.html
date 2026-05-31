@@ -256,14 +256,16 @@ BUY NOW
 </a>
   <button onclick="openTracking()"
 style="
-padding:15px 35px;
+width:100%;
+padding:16px;
+margin-top:15px;
 background:#fff;
 color:#000;
 border:none;
 border-radius:50px;
 font-weight:bold;
+font-size:16px;
 cursor:pointer;
-margin-top:15px;
 ">
 TRACK ORDER
 </button>
@@ -276,18 +278,20 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,.8);
-z-index:9999;
+background:rgba(0,0,0,0.8);
+z-index:99999;
 ">
 
-<div style="
+<div
+style="
 background:#111;
 width:90%;
 max-width:450px;
-margin:100px auto;
+margin:80px auto;
 padding:30px;
 border-radius:20px;
 text-align:center;
+color:white;
 ">
 
 <h2>Track Your Order</h2>
@@ -299,47 +303,50 @@ placeholder="Enter Tracking ID"
 style="
 width:100%;
 padding:15px;
-margin-top:20px;
-border-radius:10px;
 border:none;
+border-radius:10px;
+margin-top:15px;
 ">
 
 <br><br>
 
 <button onclick="trackOrder()"
 style="
-padding:15px 30px;
+padding:14px 30px;
 background:#ffd700;
 border:none;
 border-radius:50px;
 font-weight:bold;
+cursor:pointer;
 ">
-Track
+TRACK
 </button>
 
 <button onclick="closeTracking()"
 style="
-padding:15px 30px;
+padding:14px 30px;
 background:red;
 color:white;
 border:none;
 border-radius:50px;
 margin-left:10px;
+cursor:pointer;
 ">
-Close
+CLOSE
 </button>
 
 <div id="trackingResult"
 style="
-margin-top:20px;
+margin-top:25px;
 font-size:18px;
+font-weight:bold;
 ">
 </div>
 
 </div>
 
 </div>
-
+  
 </div>
 
 </div>
@@ -1107,16 +1114,71 @@ document.getElementById("trackingPopup").style.display="none";
 function trackOrder(){
 
 let tracking =
-document.getElementById("trackingNumber").value;
+document.getElementById("trackingNumber").value.trim();
 
 if(tracking==""){
 alert("Enter Tracking ID");
 return;
 }
 
+let savedTracking =
+localStorage.getItem("tracking");
+
+if(tracking!==savedTracking){
+
 document.getElementById("trackingResult").innerHTML=
-"📦 Tracking ID: "+tracking+
-"<br><br>🚚 Order In Transit";
+"❌ Invalid Tracking ID";
+
+return;
+}
+
+let orderTime =
+localStorage.getItem("orderTime");
+
+if(!orderTime){
+
+document.getElementById("trackingResult").innerHTML=
+"✅ Order Confirmed";
+
+return;
+}
+
+let hours =
+(Date.now()-parseInt(orderTime))
+/(1000*60*60);
+
+let status="";
+
+if(hours<2){
+
+status="✅ Order Confirmed";
+
+}
+else if(hours<12){
+
+status="🚚 Order In Transit";
+
+}
+else if(hours<24){
+
+status="📦 Shipped";
+
+}
+else if(hours<48){
+
+status="🚛 Out For Delivery";
+
+}
+else{
+
+status="🎉 Delivered";
+
+}
+
+document.getElementById("trackingResult").innerHTML=
+status;
+
+}
 
 }
 
